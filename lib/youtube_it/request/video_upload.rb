@@ -631,10 +631,7 @@ class YouTubeIt
 
         entry_attrs['gd:fields'] = ''
         if !delete_attrs.empty?
-          entry_attrs['gd:fields'] += "yt:accessControl[#{delete_attrs.join(' or ')}]"
-        end
-        if opts[:private] == 'clear'
-          entry_attrs['gd:fields'] += ",media:group/yt:private"
+          entry_attrs['gd:fields'] += "media:group/yt:private,yt:accessControl[#{delete_attrs.join(' or ')}]"
         end
 
         b = Builder::XmlMarkup.new
