@@ -629,8 +629,12 @@ class YouTubeIt
           'xmlns:gml' => 'http://www.opengis.net/gml',
           'xmlns:georss' => 'http://www.georss.org/georss' }
 
+        entry_attrs['gd:fields'] = ''
         if !delete_attrs.empty?
-          entry_attrs['gd:fields'] = "yt:accessControl[#{delete_attrs.join(' or ')}]"
+          entry_attrs['gd:fields'] += "yt:accessControl[#{delete_attrs.join(' or ')}]"
+        end
+        if opts[:private] == 'clear'
+          entry_attrs['gd:fields'] += ",media:group/yt:private"
         end
 
         b = Builder::XmlMarkup.new
